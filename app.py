@@ -65,17 +65,31 @@ def get_best_match(user_query):
 
 # Lets create a streamlit UI
 def main():
+    # Initialize the session state if it doesn't exist
+    if "inputs" not in st.session_state:
+        st.session_state.inputs = []
+
     st.title("Thoughtful AI - Customer Support Agent")
     
     # Input from the user
-    user_input = st.text_input("Ask me a question about Thoughtful AI:")
+    # user_input = None
+    # st.session_state.inputs.append(user_input)
 
-    if user_input:
+    if True:
         # Get the response
         answer = get_best_match(user_input)
+        st.session_state.inputs.append(answer)
+
+        st.write("helo")
         
         # Display the response
-        st.write(f"**AI Agent:** {answer}")
+        for item in st.session_state.inputs[1:]:
+            st.write(f"**AI Agent:** {item}")
+            st.write(f'---')
+
+    user_input = st.text_input("Ask me a question about Thoughtful AI:")
+    if user_input:
+        st.session_state.inputs.append(user_input)
 
 if __name__ == "__main__":
     main()
